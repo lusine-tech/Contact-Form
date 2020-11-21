@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .box {
+            width: 500px;
+            height: 800px;
+            background-color: #F5F6F8;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        h2 {
+            color: #2088AB;
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            text-align: left;
+            padding-left: 10px;
+            margin-bottom: 5px;
+        }
+
+        input:not([type="radio"]),
+        form textarea {
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #aaa;
+            outline: none;
+        }
+
+        .dib {
+            display: inline-block;
+        }
+
+        .control .dib {
+            margin: 10px;
+        }
+
+        .btn {
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            outline: none;
+            width: 200px;
+            height: 45px;
+            line-height: 45px;
+            text-transform: uppercase;
+            border: none;
+            background-color: #2088AB;
+            color: aliceblue;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.5s ease;
+        }
+
+        .btn:hover {
+            background-color: #26A1B1;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <form id="form" action="#" method="post" autocomplete="off">
+        <h2> Registration form </h2>
+        <div class="form-group">
+            <label for="firstName"> First Name</label>
+            <input type="text" id="firstName" placeholder="First name" required/>
+            <span id="firstNameError" class="error">More than 3 and less than 10 letters</span>
+        </div>
+        <div class="form-group">
+            <label for="lastName"> Last Name</label>
+            <input type="text" id="lastName" placeholder="Last name" required/>
+            <span id="lasttNameError" class="error">More than 3 and less than 10 letters</span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email" required/>
+            <span id="emailError" class="error">Please write correct email</span>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" placeholder="Age" required/>
+            <span id="ageError" class="error">Please write only numbers</span>
+
+        </div>
+        <div class="form-group">
+            <label for="passField">Password</label>
+            <input type="password" id="passField" placeholder="Password" autofocus required/>
+
+        </div>
+
+
+        <div class="form-group">
+            <label for="formMessage">Your Message</label>
+            <textarea name="textarea" id="formMessage" spellcheck="false">
+
+            </textarea>
+        </div>
+
+
+        <div class="control">
+            <label class="dib" for="man">Man</label>
+            <input type="radio" id="man" name="gender"/>
+
+            <label class="dib" for="woman">Woman</label>
+            <input type="radio" id="woman" name="gender" checked/>
+        </div>
+
+        <button class="btn" type="submit">Submit</button>
+    </form>
+</div>
+<script>
+
+
+    let firstName = document.getElementById('firstName');
+    const firstNameError = document.getElementById('firstNameError');
+    const lastName = document.getElementById('lastName');
+    const lastNameError = document.getElementById('lastNameError');
+    const age = document.getElementById('age');
+    const ageError = document.getElementById('ageError');
+    const email = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+    const regForm = document.getElementById('form');
+    let firstNameValue = '';
+    let lastNameValue = '';
+    let ageValue = '';
+
+    regForm.addEventListener("submit", validate);
+
+    function validate(e) {
+        e.preventDefault();
+        const letters = /^[a-zA-Z]+$/;
+        if (firstNameValue.length < 3 || firstNameValue.length > 10 && firstNameValue !== letters) {
+            firstNameError.style.display = "block";
+            firstName.style.border = "2px solid red";
+
+        } else {
+            firstNameError.style.display = 'none';
+        }
+
+        if (lastNameValue.length < 3 || lastNameValue.length > 10 && lastName !== letters) {
+            lastNameError.style.display = "block";
+            lastName.style.border = "2px solid red";
+
+        } else {
+            lastNameError.style.display = 'none';
+        }
+
+
+        atpos = email.indexOf("@");
+        dotpos = email.IndexOf(".");
+        if (atpos < 1 && dotpos < 1) {
+            emailError.style.display = "block";
+            email.style.border = "2px solid red";
+        } else {
+            emailError.style.display = "none";
+        }
+
+        const regex = /^\d+$/;
+        if (age !== regex || ageValue > 100) {
+            ageError.style.display = "block";
+            age.style.border = "2px solid red";
+        } else {
+            ageError.style.display = "none";
+        }
+    }
+
+</script>
+</body>
+</html>
